@@ -1,0 +1,3 @@
+public class {
+    public char[][] board = new char[8][8];
+
