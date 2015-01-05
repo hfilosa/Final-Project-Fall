@@ -363,7 +363,18 @@ arpublic class board{
 	    move(row,7,row,5);
 	}
     }
-	    
+
+        // checks if En Passant move can be made when player tries to move a pawn
+    public boolean checkEnPassant(int startRow, int startCol, int endRow, int endCol, boolean p1){
+	boolean move = true;
+	if (!Math.abs(startRow-endRow)==2) {
+	    move = false;
+	} else {
+	    // need to account for startRow-2 being off the board
+	    for (int i=startRow-2;i<startRow+2;i++) {
+		for (int j=startCol-1;j<startCol+1) {
+		    if (getPiece(i,j).equals("p")){
+			if 
 }
 
 
