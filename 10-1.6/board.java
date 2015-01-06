@@ -93,6 +93,20 @@ public class board{
 	board[endRow][endCol].setmoved(true);
     }
 
+    //removes passants of a players color
+    public void passantRemove(String color){
+	for (int row=0;row<8;row++){
+	    for (int col=0;col<8;col++){
+		if (board[row][col].getname().equals("pas")){
+		    if (board[row][col].getcolor().equals(color)){
+			board[row][col].setname(" ");
+			board[row][col].setcolor(null);
+		    }
+		}
+	    }
+	}
+    }
+
     public boolean pawnCheck(int krow,int kcol,String color,boolean p1){
 	int pawnRow = 0;
 	if (p1){
@@ -218,7 +232,7 @@ public class board{
 	    }
 	}
 	if (getPiece(startRow,startCol).equals("p")){
-	    if (!(pawnMove(startRow,startCol,endRow,endCol,p1))){
+	    if (!(pawnMove(startRow,startCol,endRow,endCol,color,p1))){
 		return false;
 	    }
 	}
@@ -240,7 +254,7 @@ public class board{
     }
 
     //the end coordinates have already been checked that they are not a players own pieces or outside the board
-    public boolean pawnMove(int startRow,int startCol,int endRow,int endCol,boolean p1){
+    public boolean pawnMove(int startRow,int startCol,int endRow,int endCol,String color,boolean p1){
 	int doub=0;
 	int diff=0;
 	if (p1){
@@ -257,6 +271,14 @@ public class board{
 		    return true;
 		}
 		if (diff==2 && startRow==doub){
+		    if (p1){
+			board[5][startCol].setname("pas");
+			board[5][startCol].setcolor(color);
+		    }
+		    if (!p1){
+			board[2][startCol].setname("pas");
+			board[2][startCol].setcolor(color);
+		    }
 		    return true;
 		}
 		else {
@@ -302,7 +324,7 @@ public class board{
 	else if (y>0){y=1;}
 	while (startRow!=endRow && startCol!=endCol){
 	    startRow+=x;
-	    endCol+=y;
+	    startCol+=y;
 	    if (!(getPiece(startRow,startCol).equals(" "))){
 	        return false;
 	    }
@@ -384,9 +406,9 @@ public class board{
 
     public boolean longCastling(String color,boolean p1){
 	boolean legal = false;
-	int row = 0;
+	int row = 7;
 	if (!p1){
-	    row = 7;
+	    row = 0;
 	}
 	if (getPiece(row,4).equals("K") && getPieceColor(row,4).equals(color) && getPiece(row,0).equals("R") && getPieceColor(row,0).equals(color)){
 	    if (!board[row][4].getmoved() && !board[row][0].getmoved()){

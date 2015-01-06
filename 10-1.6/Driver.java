@@ -144,6 +144,7 @@ public class Driver{
 	    player="two"; 
 	    color = p2color; 
 	}
+	test.passantRemove(color);
 	System.out.println(test.print(p1));
 	check = test.check(color,p1);
 	System.out.println("It is player "+player+"'s turn");
@@ -174,7 +175,7 @@ public class Driver{
 		    done = false;
 		}
 	    }
-	    if (!pmove[0].equals("0-0")){
+	    if (pmove[0].equals("0-0")){
 		skip=true;
 		done=true;
 		if (!(test.shortCastling(color,p1))){
