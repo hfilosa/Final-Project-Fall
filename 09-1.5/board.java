@@ -3,6 +3,9 @@ public class board{
     private String p1header = "   a   b   c   d   e   f   g    h\n";
     private String p2header = "   h   g   f   e   d   c   b    a\n";
     private String divider = "  ---------------------------------\n";
+    // for En Passant move - the pawn that would be captured
+    private piece[][] pCapture;
+    private boolean forward;
 
     //Board is set up with the black pieces at the 'top'
     //This configuration is read as facing the p1
@@ -87,7 +90,7 @@ public class board{
     public void move(int startRow,int startCol,int endRow,int endCol){
 	board[endRow][endCol] = board[startRow][startCol];
 	board[startRow][startCol] = new piece();
-	getPiece(endRow,startCol).setmoved(true);
+	board[endRow][startCol].setmoved(true);
     }
 
     public boolean pawnCheck(int krow,int kcol,String color,boolean p1){
@@ -230,7 +233,7 @@ public class board{
 	    board[startRow][startCol] = startPiece;
 	    board[endRow][endCol] = endPiece;
 	    System.out.println("This move is illegal as it would result in check");
-	    board.getPiece(startRow,startCol).setmoved(false);
+	    board[startRow][startCol].setmoved(false);
 	    return false;
 	}
 	return true;
@@ -267,7 +270,7 @@ public class board{
 		    return true;
 		}
 		else {
-		    System.out.println("A pawn can only move diagonaly to capture");
+		    System.out.println("A pawn can only move diagonally to capture");
 		    return false;}
 	    }
 	    else {
@@ -347,6 +350,7 @@ public class board{
 	return false;
     }
     
+    /*
     public boolean shortCastling(String color,boolean p1){
 	boolean legal = false;
 	int row = 0;
@@ -410,20 +414,41 @@ public class board{
 	}
 	else{return false;}
     }
-
-    /*
-        // checks if En Passant move can be made when player tries to move a pawn
-    public boolean checkEnPassant(int startRow, int startCol, int endRow, int endCol, boolean p1){
-	boolean move = true;
-	if (!Math.abs(startRow-endRow)==2) {
-	    move = false;
-	} else {
-	    // need to account for startRow-2 being off the board
-	    for (int i=startRow-2;i<startRow+2;i++) {
-		for (int j=startCol-1;j<startCol+1) {
-		    if (getPiece(i,j).equals("p")){
-			if 
     */
+    
+        // checks if En Passant move can be made 
+
+
+    public boolean checkEnPassant(int startRow, int startCol, int endRow, int endCol){
+	boolean legal = true;
+	if (!getPiece(startRow,startCol).equals("p")) {
+	    legal = false;
+	} else if (startRow!=2 && startRow!=6) {
+	    legal = false;
+	} else if (Math.abs(startRow-endRow)!=2) {
+	    legal = false;
+	} else {
+	    pCapture = board[startRow][startCol];
+	    int checkRow;
+	    if (startRow==2) {
+		checkRow=5;
+		forward=true;
+	    } else {
+		checkRow=4;
+		forward=false;
+	    }
+	    for (int i=1;i<9;i++) {
+		if (getPiece(!(checkRow,i).equals("p") && Math.abs(startCol-i)==1)) {
+		    legal = false;
+		}
+	    }
+	}
+	return legal;
+    }
+		    
+	
+			
+    
 }
 
 
