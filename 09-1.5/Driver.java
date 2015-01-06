@@ -74,17 +74,19 @@ public class Driver{
 	pause(2);
 	System.out.println("When entering the coordinates of where to move a piece to, type ! to reselect the piecce you want to move");
 	pause(3);
+	System.out.println("When selecting the piece you wish to move, type 0-0 for kingside castling(castling short) or 0-0-0 for queenside castling(castling long)");
+	pause(3);
 	System.out.println("Thats it! If you don't know how to play chess consult this website: http://www.dummies.com/how-to/content/chess-for-dummies-cheat-sheet.html");
     }
   
     public static int convertCol(String coor) {
-	col=coor.charAt(0);
+	int col=coor.charAt(0);
 	col-='a';
 	return col;
     }
 
     public static int convertRow(String coor) {
-	row=coor.charAt(1);
+	int row=coor.charAt(1);
 	row-='0';
 	row-=8;
 	row*=(-1);
@@ -156,11 +158,30 @@ public class Driver{
 	System.out.println("Please enter the coordinates of the piece you wish to move");
 	pmove[0] = sc.nextLine();
 	boolean done = false;
+	boolean skip = false;
 	while (!done){	   
 	    if (pmove[0].equals("?")){
 		help();
 		System.out.println("Please enter the coordinates of the piece you wish to move");
 		pmove[0] = sc.nextLine();
+	    }
+	    if (pmove[0].equals("0-0-0")){
+		skip=true;
+		done=true;
+		if (!(test.longCastling(color,p1))){
+		    pmove[0] = sc.nextLine();
+		    skip=false;
+		    done = false;
+		}
+	    }
+	    if (!pmove[0].equals("0-0")){
+		skip=true;
+		done=true;
+		if (!(test.shortCastling(color,p1))){
+		    pmove[0] = sc.nextLine();
+		    skip=false;
+		    done = false;
+		}
 	    }
 	    if (!(piecePresent(pmove[0],color,false))){
 		System.out.println("Reenter the piece you wish to move");
@@ -172,7 +193,7 @@ public class Driver{
 	pause(1);
 	System.out.println("Please enter the coordinates of the place you wish to move to");
 	pmove[1] = sc.nextLine();
-	while (!done){
+	while (!done && !skip){
 	    if (pmove[1].equals("?")){
 		help();
 		System.out.println("Please enter the coordinates of the place you wish to move to");

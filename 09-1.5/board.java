@@ -1,4 +1,4 @@
-arpublic class board{
+public class board{
     private piece[][] board = new piece[8][8];
     private String p1header = "   a   b   c   d   e   f   g    h\n";
     private String p2header = "   h   g   f   e   d   c   b    a\n";
@@ -87,7 +87,7 @@ arpublic class board{
     public void move(int startRow,int startCol,int endRow,int endCol){
 	board[endRow][endCol] = board[startRow][startCol];
 	board[startRow][startCol] = new piece();
-	getPiece(endRow,startCol).setmoved();
+	getPiece(endRow,startCol).setmoved(true);
     }
 
     public boolean pawnCheck(int krow,int kcol,String color,boolean p1){
@@ -230,6 +230,7 @@ arpublic class board{
 	    board[startRow][startCol] = startPiece;
 	    board[endRow][endCol] = endPiece;
 	    System.out.println("This move is illegal as it would result in check");
+	    board.getPiece(startRow,startCol).setmoved(false);
 	    return false;
 	}
 	return true;
@@ -345,6 +346,7 @@ arpublic class board{
 	}
 	return false;
     }
+    
     public boolean shortCastling(String color,boolean p1){
 	boolean legal = false;
 	int row = 0;
@@ -356,14 +358,60 @@ arpublic class board{
 		if (getPiece(row,5).equals(" ") && getPiece(row,6).equals(" ")){
 		    legal = true;
 		}
+		else{System.out.println("There are pieces between your king and rook. They cannot castle!");}
 	    }
+	    else{System.out.println("Your rook or king has moved and cannot castle");}
 	}
+	else{System.out.println("Your King or rook isn't even in there original locations! They cannot castle.");}
 	if (legal){
 	    move(row,4,row,6);
 	    move(row,7,row,5);
+	    if (check(color,p1)){
+		move(row,6,row,4);
+		move(row,5,row,7);
+		getPiece(row,4).setmoved(false);
+		getPiece(row,7).setmoved(false);
+		System.out.println("This move would put you in check!");
+		return false;
+	    }
+	    else {return true;}
 	}
+	else{return false;}
     }
 
+    public boolean longCastling(String color,boolean p1){
+	boolean legal = false;
+	int row = 0;
+	if (!p1){
+	    row = 7;
+	}
+	if (getPiece(row,4).equals("K") && getPieceColor(row,4).equals(color) && getPiece(row,0).equals("R") && getPieceColor(row,0).equals(color)){
+	    if (!getPiece(row,4).getmoved() && !getPiece(row,0).getmoved()){
+		if (getPiece(row,5).equals(" ") && getPiece(row,6).equals(" ")){
+		    legal = true;
+		}
+		else{System.out.println("There are pieces between your king and rook. They cannot castle!");}
+	    }
+	    else{System.out.println("Your rook or king has moved and cannot castle");}
+	}
+	else{System.out.println("Your King or rook isn't even in there original locations! They cannot castle.");}
+	if (legal){
+	    move(row,4,row,2);
+	    move(row,0,row,3);
+	    if (check(color,p1)){
+		move(row,2,row,4);
+		move(row,3,row,0);
+		getPiece(row,4).setmoved(false);
+		getPiece(row,0).setmoved(false);
+		System.out.println("This move would put you in check!");
+		return false;
+	    }
+	else{return true;}
+	}
+	else{return false;}
+    }
+
+    /*
         // checks if En Passant move can be made when player tries to move a pawn
     public boolean checkEnPassant(int startRow, int startCol, int endRow, int endCol, boolean p1){
 	boolean move = true;
@@ -375,6 +423,7 @@ arpublic class board{
 		for (int j=startCol-1;j<startCol+1) {
 		    if (getPiece(i,j).equals("p")){
 			if 
+    */
 }
 
 

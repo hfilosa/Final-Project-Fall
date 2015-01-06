@@ -29,10 +29,10 @@ public class piece{
     public String getname(){
 	return name;
     }
-    public void setmoved(){
-	moved=true;
+    public void setmoved(boolean move){
+	moved=move;
     }
-    public void getmoved(){
+    public boolean getmoved(){
 	return moved;
     }
     public String toString(){
