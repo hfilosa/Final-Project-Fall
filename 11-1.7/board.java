@@ -1,13 +1,14 @@
+import java.util.ArrayList;
+
 public class board{
     private piece[][] board = new piece[8][8];
     private String p1header = "   a   b   c   d   e   f   g    h\n";
     private String p2header = "   h   g   f   e   d   c   b    a\n";
     private String divider = "  ---------------------------------\n";
-    // for En Passant move - the pawn that would be captured
-    private piece[][] pCapture;
-    private boolean forward;
+    private ArrayList<piece> p1losses = new ArrayList<piece>();
+    private ArrayList<piece> p2losses = new ArrayList<piece>();
 
-    //Board is set up with the black pieces at the 'top'
+    //Board is set up with the p2 pieces at the 'top'
     //This configuration is read as facing the p1
     public board(String p1color,String p2color){
 	for (int row=0;row<8;row++){
@@ -248,7 +249,17 @@ public class board{
 	    board[startRow][startCol].setmoved(false);
 	    return false;
 	}
-	return true;
+	else {
+	    if (!endPiece.getname().equals(" ") || !endPiece.getname().equals("pas"));{
+		if (p1){
+		    p1losses.add(endPiece);
+		}
+		if (!p1){
+		    p2losses.add(endPiece);
+		}
+	    }
+	    return true;
+	}
     }
 
     //the end coordinates have already been checked that they are not a players own pieces or outside the board
