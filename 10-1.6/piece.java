@@ -37,7 +37,7 @@ public class piece{
     }
     public String toString(){
 	if (color == null){return " ";}
-	//	else if (name.equals("pas")){return " ";}
+	//else if (name.equals("pas")){return " ";}
 	else if (color.equals("black")){return black+name+reset;}
 	else if(color.equals("red")){return red+name+reset;}
 	else if(color.equals("green")){return green+name+reset;}

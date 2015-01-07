@@ -90,7 +90,21 @@ public class board{
     public void move(int startRow,int startCol,int endRow,int endCol){
 	board[endRow][endCol] = board[startRow][startCol];
 	board[startRow][startCol] = new piece();
-	board[endRow][startCol].setmoved(true);
+	board[endRow][endCol].setmoved(true);
+    }
+
+    //removes passants of a players color
+    public void passantRemove(String color){
+	for (int row=0;row<8;row++){
+	    for (int col=0;col<8;col++){
+		if (board[row][col].getname().equals("pas")){
+		    if (board[row][col].getcolor().equals(color)){
+			board[row][col].setname(" ");
+			board[row][col].setcolor(null);
+		    }
+		}
+	    }
+	}
     }
 
     public boolean pawnCheck(int krow,int kcol,String color,boolean p1){
@@ -218,7 +232,7 @@ public class board{
 	    }
 	}
 	if (getPiece(startRow,startCol).equals("p")){
-	    if (!(pawnMove(startRow,startCol,endRow,endCol,p1))){
+	    if (!(pawnMove(startRow,startCol,endRow,endCol,color,p1))){
 		return false;
 	    }
 	}
@@ -240,7 +254,7 @@ public class board{
     }
 
     //the end coordinates have already been checked that they are not a players own pieces or outside the board
-    public boolean pawnMove(int startRow,int startCol,int endRow,int endCol,boolean p1){
+    public boolean pawnMove(int startRow,int startCol,int endRow,int endCol,String color,boolean p1){
 	int doub=0;
 	int diff=0;
 	if (p1){
@@ -257,6 +271,14 @@ public class board{
 		    return true;
 		}
 		if (diff==2 && startRow==doub){
+		    if (p1){
+			board[5][startCol].setname("pas");
+			board[5][startCol].setcolor(color);
+		    }
+		    if (!p1){
+			board[2][startCol].setname("pas");
+			board[2][startCol].setcolor(color);
+		    }
 		    return true;
 		}
 		else {
@@ -302,7 +324,7 @@ public class board{
 	else if (y>0){y=1;}
 	while (startRow!=endRow && startCol!=endCol){
 	    startRow+=x;
-	    endCol+=y;
+	    startCol+=y;
 	    if (!(getPiece(startRow,startCol).equals(" "))){
 	        return false;
 	    }
@@ -350,7 +372,6 @@ public class board{
 	return false;
     }
     
-    /*
     public boolean shortCastling(String color,boolean p1){
 	boolean legal = false;
 	int row = 0;
@@ -358,7 +379,7 @@ public class board{
 	    row = 7;
 	}
 	if (getPiece(row,4).equals("K") && getPieceColor(row,4).equals(color) && getPiece(row,7).equals("R") && getPieceColor(row,7).equals(color)){
-	    if (!getPiece(row,4).getmoved() && !getPiece(row,7).getmoved()){
+	    if (!board[row][4].getmoved() && !board[row][7].getmoved()){
 		if (getPiece(row,5).equals(" ") && getPiece(row,6).equals(" ")){
 		    legal = true;
 		}
@@ -373,8 +394,8 @@ public class board{
 	    if (check(color,p1)){
 		move(row,6,row,4);
 		move(row,5,row,7);
-		getPiece(row,4).setmoved(false);
-		getPiece(row,7).setmoved(false);
+		board[row][4].setmoved(false);
+		board[row][7].setmoved(false);
 		System.out.println("This move would put you in check!");
 		return false;
 	    }
@@ -385,18 +406,19 @@ public class board{
 
     public boolean longCastling(String color,boolean p1){
 	boolean legal = false;
-	int row = 0;
+	int row = 7;
 	if (!p1){
-	    row = 7;
+	    row = 0;
 	}
 	if (getPiece(row,4).equals("K") && getPieceColor(row,4).equals(color) && getPiece(row,0).equals("R") && getPieceColor(row,0).equals(color)){
-	    if (!getPiece(row,4).getmoved() && !getPiece(row,0).getmoved()){
+	    if (!board[row][4].getmoved() && !board[row][0].getmoved()){
 		if (getPiece(row,5).equals(" ") && getPiece(row,6).equals(" ")){
 		    legal = true;
 		}
 		else{System.out.println("There are pieces between your king and rook. They cannot castle!");}
 	    }
-	    else{System.out.println("Your rook or king has moved and cannot castle");}
+	    if (board[row][4].getmoved() || board[row][0].getmoved()){
+		System.out.println("Your rook or king has moved and cannot castle");}
 	}
 	else{System.out.println("Your King or rook isn't even in there original locations! They cannot castle.");}
 	if (legal){
@@ -405,8 +427,8 @@ public class board{
 	    if (check(color,p1)){
 		move(row,2,row,4);
 		move(row,3,row,0);
-		getPiece(row,4).setmoved(false);
-		getPiece(row,0).setmoved(false);
+		board[row][4].setmoved(false);
+	        board[row][0].setmoved(false);
 		System.out.println("This move would put you in check!");
 		return false;
 	    }
@@ -414,20 +436,23 @@ public class board{
 	}
 	else{return false;}
     }
-    */
+    
     
         // checks if En Passant move can be made 
 
-
+    /*
     public boolean checkEnPassant(int startRow, int startCol, int endRow, int endCol){
 	boolean legal = true;
 	if (!getPiece(startRow,startCol).equals("p")) {
 	    legal = false;
-	} else if (startRow!=2 && startRow!=6) {
+	} 
+	else if (startRow!=2 && startRow!=6) {
 	    legal = false;
-	} else if (Math.abs(startRow-endRow)!=2) {
+	}
+	else if (Math.abs(startRow-endRow)!=2) {
 	    legal = false;
-	} else {
+	}
+	else {
 	    pCapture = board[startRow][startCol];
 	    int checkRow;
 	    if (startRow==2) {
@@ -445,7 +470,7 @@ public class board{
 	}
 	return legal;
     }
-		    
+*/		    
 	
 			
     

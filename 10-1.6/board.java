@@ -280,12 +280,13 @@ public class board{
 			board[2][startCol].setcolor(color);
 		    }
 		    return true;
-		}
-		else {
-		    System.out.println("This pawn is blocked!");
-		    return false;}
+		} 
+	    } else {
+		System.out.println("This pawn is blocked!");
+		return false;
 	    }
 	}
+
 	if (Math.abs(startCol-endCol)==1){
 	    if (diff==1){
 		if (!(getPiece(endRow,endCol).equals(" "))){
@@ -322,7 +323,7 @@ public class board{
 	int y = (endCol-startCol);
 	if (y<0){y=(-1);}
 	else if (y>0){y=1;}
-	while (startRow!=endRow && startCol!=endCol){
+	while (startRow!=endRow || startCol!=endCol){
 	    startRow+=x;
 	    startCol+=y;
 	    if (!(getPiece(startRow,startCol).equals(" "))){
@@ -345,7 +346,7 @@ public class board{
 	int y = (startCol-endCol);
 	if ( ( x==0 && y!=0 ) || ( x!=0 && y==0)){
 	    if(sweep(startRow,startCol,endRow,endCol)){return true;}
-	    return false;
+		    return false;
 	}
 	return false;
     }
