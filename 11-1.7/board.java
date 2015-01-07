@@ -225,7 +225,7 @@ public class board{
 	    }
 	}
 	if (getPiece(startRow,startCol).equals("Q")){
-	    if (!(bishopMove(startRow,startCol,endRow,endCol))){
+	    if (!(queenMove(startRow,startCol,endRow,endCol))){
 		System.out.println("This Queen is blocked!");
 		return false;
 	    }
@@ -333,7 +333,7 @@ public class board{
 	int y = (endCol-startCol);
 	if (y<0){y=(-1);}
 	else if (y>0){y=1;}
-	while (startRow!=endRow || startCol!=endCol){
+	while (startRow!=endRow && startCol!=endCol){
 	    startRow+=x;
 	    startCol+=y;
 	    if (!(getPiece(startRow,startCol).equals(" "))){
@@ -372,7 +372,7 @@ public class board{
     }
     
     public boolean queenMove(int startRow,int startCol,int endRow,int endCol){
-	if (diagonalMove(startRow,startCol,endRow,endCol) || diagonalMove(startRow,startCol,endRow,endCol)){return true;}
+	if (diagonalMove(startRow,startCol,endRow,endCol) || horizontalMove(startRow,startCol,endRow,endCol)){return true;}
 	return false;
     }
 
@@ -446,45 +446,7 @@ public class board{
 	else{return true;}
 	}
 	else{return false;}
-    }
-    
-    
-        // checks if En Passant move can be made 
-
-    /*
-    public boolean checkEnPassant(int startRow, int startCol, int endRow, int endCol){
-	boolean legal = true;
-	if (!getPiece(startRow,startCol).equals("p")) {
-	    legal = false;
-	} 
-	else if (startRow!=2 && startRow!=6) {
-	    legal = false;
-	}
-	else if (Math.abs(startRow-endRow)!=2) {
-	    legal = false;
-	}
-	else {
-	    pCapture = board[startRow][startCol];
-	    int checkRow;
-	    if (startRow==2) {
-		checkRow=5;
-		forward=true;
-	    } else {
-		checkRow=4;
-		forward=false;
-	    }
-	    for (int i=1;i<9;i++) {
-		if (getPiece(!(checkRow,i).equals("p") && Math.abs(startCol-i)==1)) {
-		    legal = false;
-		}
-	    }
-	}
-	return legal;
-    }
-*/		    
-	
-			
-    
+    } 
 }
 
 

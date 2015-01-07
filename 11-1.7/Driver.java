@@ -189,7 +189,6 @@ public class Driver{
 	    else {done=true;}
 	}
 	done = false;
-	pause(1);
 	System.out.println("Please enter the coordinates of the place you wish to move to");
 	pmove[1] = sc.nextLine();
 	while (!done && !skip){
