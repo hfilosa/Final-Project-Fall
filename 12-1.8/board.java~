@@ -60,10 +60,10 @@ public class board{
 		    ans+="   Number of Captured Pieces";
 		}
 		if (row==4) {
-		    ans+="   You     : "+p2losses.size();
+		    ans+="   You     : "+p2losses.size()-1;
 		}
 		if (row==5) {
-		    ans+="   Player 2: "+p1losses.size();
+		    ans+="   Player 2: "+p1losses.size()-1;
 		}
 		ans+="\n"+divider;
 
@@ -270,7 +270,7 @@ public class board{
 	    return false;
 	}
 	else {
-	    if (!(endPiece.getname().equals(" ")) && !(endPiece.getname().equals("pas")));{System.out.println("!!");
+	    if (!endPiece.getname().equals(" ") && !endPiece.getname().equals("pas"));{
 		if (p1){
 		    p1losses.add(endPiece);
 		}

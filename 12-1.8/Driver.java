@@ -130,7 +130,6 @@ public class Driver{
 	int startRow=convertRow(startCoor);
 	int endCol=convertCol(endCoor);
 	int endRow=convertRow(endCoor);
-	System.out.println("startRow: "+startRow+" startCol: "+startCol+"\nendRow: "+endRow+" endCol: "+endCol);
 	if (!(test.moveExecutor(startRow,startCol,endRow,endCol,color,p1))){
 	    return false;
 	}
@@ -225,7 +224,8 @@ public class Driver{
 		if (move(pmove[0],pmove[1],color,p1)){
 		    done=true;
 		}
-		else {pmove[1]="";}	    
+		else {pmove[1]="";
+		    System.out.println("Enter the coordinates of the piece you wish to move");}	    
 	    }
 	}
 	System.out.println("Player "+player+"'s turn is done");

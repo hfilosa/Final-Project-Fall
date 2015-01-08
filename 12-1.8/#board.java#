@@ -270,7 +270,7 @@ public class board{
 	    return false;
 	}
 	else {
-	    if (!(endPiece.getname().equals(" ")) && !(endPiece.getname().equals("pas")));{System.out.println("!!");
+	    if (!(endPiece.getname().equals(" ")) && !(endPiece.getname().equals("pas")));{
 		if (p1){
 		    p1losses.add(endPiece);
 		}
