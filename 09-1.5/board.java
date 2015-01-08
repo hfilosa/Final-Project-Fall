@@ -350,7 +350,6 @@ public class board{
 	return false;
     }
     
-    /*
     public boolean shortCastling(String color,boolean p1){
 	boolean legal = false;
 	int row = 0;
@@ -414,8 +413,8 @@ public class board{
 	}
 	else{return false;}
     }
-    */
-    
+   
+    /*
         // checks if En Passant move can be made 
 
 
@@ -447,7 +446,7 @@ public class board{
     }
 		    
 	
-			
+    */		
     
 }
 

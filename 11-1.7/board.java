@@ -60,10 +60,10 @@ public class board{
 		    ans+="   Number of Captured Pieces";
 		}
 		if (row==4) {
-		    ans+="   You     : "+p2losses.size()-1;
+		    ans+="   You     : "+p2losses.size();
 		}
 		if (row==5) {
-		    ans+="   Player 2: "+p1losses.size()-1;
+		    ans+="   Player 2: "+p1losses.size();
 		}
 		ans+="\n"+divider;
 
