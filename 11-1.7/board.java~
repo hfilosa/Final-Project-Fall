@@ -1,13 +1,14 @@
+import java.util.ArrayList;
+
 public class board{
     private piece[][] board = new piece[8][8];
     private String p1header = "   a   b   c   d   e   f   g    h\n";
     private String p2header = "   h   g   f   e   d   c   b    a\n";
     private String divider = "  ---------------------------------\n";
-    // for En Passant move - the pawn that would be captured
-    private piece[][] pCapture;
-    private boolean forward;
+    private ArrayList<piece> p1losses = new ArrayList<piece>();
+    private ArrayList<piece> p2losses = new ArrayList<piece>();
 
-    //Board is set up with the black pieces at the 'top'
+    //Board is set up with the p2 pieces at the 'top'
     //This configuration is read as facing the p1
     public board(String p1color,String p2color){
 	for (int row=0;row<8;row++){
@@ -205,7 +206,6 @@ public class board{
     public boolean moveExecutor(int startRow,int startCol,int endRow,int endCol,String color,boolean p1){
 	piece startPiece = board[startRow][startCol];
 	piece endPiece=board[endRow][endCol];
-	System.out.println("@");
 	if (getPiece(startRow,startCol).equals("R")){
 	    if (!(rookMove(startRow,startCol,endRow,endCol))){
 	        System.out.println("This rook is blocked!");
@@ -226,7 +226,7 @@ public class board{
 	    }
 	}
 	if (getPiece(startRow,startCol).equals("Q")){
-	    if (!(bishopMove(startRow,startCol,endRow,endCol))){
+	    if (!(queenMove(startRow,startCol,endRow,endCol))){
 		System.out.println("This Queen is blocked!");
 		return false;
 	    }
@@ -241,7 +241,6 @@ public class board{
 		return false;
 	    }
 	}
-	System.out.println("@");
 	move(startRow,startCol,endRow,endCol);
 	if (check(color,p1)){
 	    board[startRow][startCol] = startPiece;
@@ -250,7 +249,17 @@ public class board{
 	    board[startRow][startCol].setmoved(false);
 	    return false;
 	}
-	return true;
+	else {
+	    if (!endPiece.getname().equals(" ") || !endPiece.getname().equals("pas"));{
+		if (p1){
+		    p1losses.add(endPiece);
+		}
+		if (!p1){
+		    p2losses.add(endPiece);
+		}
+	    }
+	    return true;
+	}
     }
 
     //the end coordinates have already been checked that they are not a players own pieces or outside the board
@@ -265,6 +274,9 @@ public class board{
 	    doub = 1;
 	    diff=endRow-startRow;
 	}
+	if (diff>2){
+	    System.out.println("Pawns can only move forward one space at a time and two spaces on their first move");
+	} 
 	if (startCol==endCol){
 	    if (getPiece(endRow,endCol).equals(" ")){
 		if (diff==1){
@@ -281,6 +293,7 @@ public class board{
 		    }
 		    return true;
 		} 
+		else{System.out.println("Pawns can only move forward two spaces on their first move");}
 	    } else {
 		System.out.println("This pawn is blocked!");
 		return false;
@@ -290,6 +303,14 @@ public class board{
 	if (Math.abs(startCol-endCol)==1){
 	    if (diff==1){
 		if (!(getPiece(endRow,endCol).equals(" "))){
+		    if (getPiece(endRow,endCol).equals("pas")){
+			if (p1){
+			    board[endRow+1][endCol]=new piece();
+			}
+			if(!p1){
+			    board[endRow-1][endCol]=new piece();
+			}
+		    }
 		    return true;
 		}
 		else {
@@ -323,7 +344,7 @@ public class board{
 	int y = (endCol-startCol);
 	if (y<0){y=(-1);}
 	else if (y>0){y=1;}
-	while (startRow!=endRow || startCol!=endCol){
+	while (startRow!=endRow && startCol!=endCol){
 	    startRow+=x;
 	    startCol+=y;
 	    if (!(getPiece(startRow,startCol).equals(" "))){
@@ -362,7 +383,7 @@ public class board{
     }
     
     public boolean queenMove(int startRow,int startCol,int endRow,int endCol){
-	if (diagonalMove(startRow,startCol,endRow,endCol) || diagonalMove(startRow,startCol,endRow,endCol)){return true;}
+	if (diagonalMove(startRow,startCol,endRow,endCol) || horizontalMove(startRow,startCol,endRow,endCol)){return true;}
 	return false;
     }
 
@@ -436,45 +457,7 @@ public class board{
 	else{return true;}
 	}
 	else{return false;}
-    }
-    
-    
-        // checks if En Passant move can be made 
-
-    /*
-    public boolean checkEnPassant(int startRow, int startCol, int endRow, int endCol){
-	boolean legal = true;
-	if (!getPiece(startRow,startCol).equals("p")) {
-	    legal = false;
-	} 
-	else if (startRow!=2 && startRow!=6) {
-	    legal = false;
-	}
-	else if (Math.abs(startRow-endRow)!=2) {
-	    legal = false;
-	}
-	else {
-	    pCapture = board[startRow][startCol];
-	    int checkRow;
-	    if (startRow==2) {
-		checkRow=5;
-		forward=true;
-	    } else {
-		checkRow=4;
-		forward=false;
-	    }
-	    for (int i=1;i<9;i++) {
-		if (getPiece(!(checkRow,i).equals("p") && Math.abs(startCol-i)==1)) {
-		    legal = false;
-		}
-	    }
-	}
-	return legal;
-    }
-*/		    
-	
-			
-    
+    } 
 }
 
 

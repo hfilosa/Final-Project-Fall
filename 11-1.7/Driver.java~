@@ -96,13 +96,12 @@ public class Driver{
     //Inputs are the coordinates that are to be checked and the color it should be
     public static boolean piecePresent(String coor,String color,boolean move){
 	if (coor.length()!=2){
+	    System.out.println("Invalid input. Proper input: a3, g6, etc.");
 	    return false;
 	}
 	int col=convertCol(coor);
 	int row=convertRow(coor);
-	System.out.println("row: "+row +" col:  " +col);
 	if (row<8 && row>=0 && col<8 && col>=0){
-	    System.out.println(test.getPiece(row,col));
 	    if (move){
 		if (!(color.equals(test.getPieceColor(row,col)))){return true;}
 		else {
@@ -155,7 +154,6 @@ public class Driver{
 	    System.out.println("You must remove yourself from check this turn!");
 	}
 	String[] pmove = new String[2];
-	pause(1);
 	System.out.println("Please enter the coordinates of the piece you wish to move");
 	pmove[0] = sc.nextLine();
 	boolean done = false;
@@ -191,7 +189,6 @@ public class Driver{
 	    else {done=true;}
 	}
 	done = false;
-	pause(1);
 	System.out.println("Please enter the coordinates of the place you wish to move to");
 	pmove[1] = sc.nextLine();
 	while (!done && !skip){

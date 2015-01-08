@@ -5,8 +5,8 @@ public class board{
     private String p1header = "   a   b   c   d   e   f   g    h\n";
     private String p2header = "   h   g   f   e   d   c   b    a\n";
     private String divider = "  ---------------------------------\n";
-    private ArrayList<piece> p1losses = new ArrayList<piece>();
-    private ArrayList<piece> p2losses = new ArrayList<piece>();
+    ArrayList<piece> p1losses = new ArrayList<piece>();
+    ArrayList<piece> p2losses = new ArrayList<piece>();
 
     //Board is set up with the p2 pieces at the 'top'
     //This configuration is read as facing the p1
@@ -55,8 +55,18 @@ public class board{
 		for (int col=0;col<8;col++){
 		    ans+="| "+board[row][col]+" ";
 		}
-		ans+="| "+(char)('0'+(8-row))+"\n";
-		ans+=divider;
+		ans+="| "+(char)('0'+(8-row));
+		if (row==3) {
+		    ans+="   Number of Captured Pieces";
+		}
+		if (row==4) {
+		    ans+="   You     : "+p2losses.size()-1;
+		}
+		if (row==5) {
+		    ans+="   Player 2: "+p1losses.size()-1;
+		}
+		ans+="\n"+divider;
+
 	    }
 	    ans+=p1header;
 	}
@@ -68,8 +78,18 @@ public class board{
 		for (int col=7;col>=0;col--){
 		    ans+="| "+board[row][col]+" ";
 		}
-		ans+="| "+(char)('0'+(8-row))+"\n";
-		ans+=divider;
+		ans+="| "+(char)('0'+(8-row));
+		if (row==5) {
+		    ans+="   Number of Captured Pieces";
+		}
+		if (row==4) {
+		    ans+="   You     : "+p1losses.size();
+		}
+		if (row==3) {
+		    ans+="   Player 1: "+p2losses.size();
+		}
+		ans+="\n"+divider;
+
 	    }
 	    ans+=p2header;
 	}
@@ -250,7 +270,7 @@ public class board{
 	    return false;
 	}
 	else {
-	    if (!endPiece.getname().equals(" ") || !endPiece.getname().equals("pas"));{
+	    if (!endPiece.getname().equals(" ") && !endPiece.getname().equals("pas"));{
 		if (p1){
 		    p1losses.add(endPiece);
 		}
