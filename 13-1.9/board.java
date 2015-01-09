@@ -59,15 +59,27 @@ public class board{
 		    ans+="| "+board[row][col]+" ";
 		}
 		ans+="| "+(char)('0'+(8-row));
-		if (row==1) {
+		if (row==2) {
 		    ans+=boxtop;
 		}
-		if (row==2){
+		if (row==3){
+		    String p2pieces = "         ";
+		    for (piece x: p2losses){
+			p2pieces+=x.toString()+" ";
+		    }
+		    ans+=p2pieces;
 		}
-		if (row==3) {
+		if (row==4) {
 		    ans+=boxtop;
 		}
-		if (row==5) {
+		if (row==5){
+		    String p1pieces = "        ";
+		    for (piece x: p1losses){
+			p1pieces+=x.toString()+" ";
+		    }
+		    ans+=p1pieces;
+		}
+		if (row==6) {
 		    ans+=boxtop;
 		}
 		ans+="\n"+divider;
@@ -84,17 +96,30 @@ public class board{
 		    ans+="| "+board[row][col]+" ";
 		}
 		ans+="| "+(char)('0'+(8-row));
-		if (row==5) {
-		    ans+="   Number of Captured Pieces";
+        	if (row==2) {
+		    ans+=boxtop;
+		}
+		if (row==5){
+		    String p2pieces = "        ";
+		    for (piece x: p2losses){
+			p2pieces+=x.toString()+" ";
+		    }
+		    ans+=p2pieces;
 		}
 		if (row==4) {
-		    ans+="   You     : "+p1losses.size();
+		    ans+=boxtop;
 		}
-		if (row==3) {
-		    ans+="   Player 1: "+p2losses.size();
+		if (row==3){
+		    String p1pieces = "        ";
+		    for (piece x: p1losses){
+			p1pieces+=x.toString()+" ";
+		    }
+		    ans+=p1pieces;
+		}
+		if (row==6) {
+		    ans+=boxtop;
 		}
 		ans+="\n"+divider;
-
 	    }
 	    ans+=p2header;
 	}

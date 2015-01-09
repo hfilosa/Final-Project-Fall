@@ -73,6 +73,8 @@ public class Driver{
 	System.out.println("If a move is illegal it will fail and you will be asked to input a legal move");
 	pause(2);
 	System.out.println("When entering the coordinates of where to move a piece to, type ! to reselect the piece you want to move");
+	pause(2);
+	System.out.println("If you would like to see a list of the specific pieces that have been captured, type #.");
 	pause(3);
 	System.out.println("When selecting the piece you wish to move, type 0-0 for kingside castling(castling short) or 0-0-0 for queenside castling(castling long)");
 	pause(3);
@@ -161,6 +163,13 @@ public class Driver{
 	    if (pmove[0].equals("?")){
 		help();
 		System.out.println("Please enter the coordinates of the piece you wish to move");
+		pmove[0] = sc.nextLine();
+	    }
+	    if (pmove[0].equals("#")) {
+		System.out.println("Player 1 has captured "+test.p1losses.size()+" pieces. They are:");
+		System.out.println(test.p1losses);
+		System.out.println("Player 2 has captured "+test.p2losses.size()+" pieces. They are:");
+		System.out.println(test.p2losses);
 		pmove[0] = sc.nextLine();
 	    }
 	    if (pmove[0].equals("0-0-0")){
