@@ -1,6 +1,7 @@
 Final-Project
 =============
 Ultimate Chess
+
 Henry Filosa & Alice Xue
 
 A repository for the final project. Our project is chess in the terminal window. It can replicate all the features of chess such as castling, pawn promotion, en passants and certifying that moves do not put a player in check. It also has eight different colors to play with.
