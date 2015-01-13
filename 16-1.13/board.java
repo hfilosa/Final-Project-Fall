@@ -395,7 +395,7 @@ public class board{
 	int y = (endCol-startCol);
 	if (y<0){y=(-1);}
 	else if (y>0){y=1;}
-	while (startRow!=endRow && startCol!=endCol){
+	while (startRow!=endRow || startCol!=endCol){
 	    startRow+=x;
 	    startCol+=y;
 	    if (!(getPiece(startRow,startCol).equals(" "))){
