@@ -245,6 +245,8 @@ public class Driver{
 		    }
 		    else {done2 = true;}
 		}
+		System.out.println("Please enter the coordinates of the place you wish to move to");
+		pmove[1] = sc.nextLine();
 	    }
 	    if (!(piecePresent(pmove[1],color,true))){
 		pmove[1] = sc.nextLine();
@@ -280,12 +282,12 @@ public class Driver{
 	     if (won){break;}
 	     playerTurn(false);
 	}
-	System.out.println("Game over!");
+	clearConsole();
 	pause(1);
 	if (p1Victory){
-	    System.out.println("Congratulations Player One! You are a chess pro!");
+	    System.out.println("Congratulations Player One "+p1name+"! You are a chess pro!");
 	}
-	else {System.out.println("Congratulations Player Two! You are a chess pro!");}
+	else {System.out.println("Congratulations "+p2name+"! You are a chess pro!");}
 	pause(3);
 	clearConsole();
     }
