@@ -1,4 +1,4 @@
-public class piece{
+public class piece implements Comparable<piece>{
     private String color;
     private String name;
     private boolean moved;
@@ -34,6 +34,9 @@ public class piece{
     }
     public boolean getmoved(){
 	return moved;
+    }
+    public int compareTo(piece other){
+	return this.name.compareTo(other.name);
     }
     public String toString(){
 	if (color == null){return " ";}
