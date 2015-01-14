@@ -300,7 +300,7 @@ public class board{
 	    return false;
 	}
 	else {
-	    if (!(endPiece.getname().equals(" ")) && !(endPiece.getname().equals("pas")));{
+	    if (!(endPiece.getname().equals(" "))){ && !(endPiece.getname().equals("pas")));{
 		System.out.println(endPiece.getname());
 		if (p1){
 		    p2losses.add(endPiece);
