@@ -3,7 +3,6 @@ import java.util.Scanner;
 public class Driver{
     static Scanner sc = new Scanner(System.in);
     static String p1color,p2color;
-    static String p1name, p2name;
     static String[] colors = {"black","red","green","yellow","blue","purple","cyan","white"};
     static boolean won = false;
     static boolean p1turn,p2turn;
@@ -11,17 +10,13 @@ public class Driver{
     static boolean p1Victory;
 
     public static void colorSelect(){
-	System.out.println("What is your name, player 1?");
-	p1name=sc.nextLine();
-	System.out.println("What is your name, player 2?");
-	p2name=sc.nextLine();
-	System.out.println("Select a color for "+p1name+":");
+	System.out.println("Select a color for player 1:");
 	System.out.println("Color options:");
 	for (int i=0;i<colors.length;i++){
 	    System.out.print(colors[i]+" ");}
 	System.out.println();
 	p1color= sc.nextLine();
-	System.out.println("Select a color for "+p2name+":");
+	System.out.println("Select a color for player 2:");
 	p2color= sc.nextLine();
 	boolean error1 = true;
 	boolean error2 = true;
@@ -32,7 +27,7 @@ public class Driver{
 	    for (int i=0;i<colors.length;i++){
 		if (p2color.equals(colors[i])) error2=false;}
 	    if (error1){
-		System.out.println("Invalid color selected for "+p1name);
+		System.out.println("Invalid color selected for player 1");
 		System.out.println("Choose a color listed below:");
 		for (int i=0;i<colors.length;i++){
 		    System.out.print(colors[i]+" ");}
@@ -40,7 +35,7 @@ public class Driver{
 		p1color= sc.nextLine();
 	    }
 	    if (error2){
-		System.out.println("Invalid color selected for "+p2name);
+		System.out.println("Invalid color selected for player 2");
 		System.out.println("Choose a color listed below:");
 		for (int i=0;i<colors.length;i++){
 		    System.out.print(colors[i]+" ");}
@@ -53,9 +48,9 @@ public class Driver{
 		error2=true;
 		System.out.println("The players cannot have the same color!");
 		pause(1);
-		System.out.println("Select a color for "+p1name+":");
+		System.out.println("Select a color for player1:");
 		p1color= sc.nextLine();
-		System.out.println("Select a color for "+p2name+":");
+		System.out.println("Select a color for player2:");
 		p2color= sc.nextLine();
 	    }
 	}
@@ -81,13 +76,9 @@ public class Driver{
 	pause(2);
 	System.out.println("Simply enter the coordinates of the piece you wish to move and its desired destination");
 	pause(3);
-	System.out.println("Coordinates are entered letter first and then number. ex: a2, d6, etc");
+	System.out.println("Coordinates are entered letter first and then number. ex: a2 a3");
 	pause(2);
-	System.out.println("Enter the coordinates of the peice you want to move, then press enter");
-	pause(1);
-	System.out.println("The enter the coordinates of where you wish to move the piece");
-	pause(1);
-	System.out.println("If a move is illegal it will fail and you will be asked reenter where you wish to move to");
+	System.out.println("If a move is illegal it will fail and you will be asked to input a legal move");
 	pause(2);
 	System.out.println("When entering the coordinates of where to move a piece to, type ! to reselect the piece you want to move");
 	pause(3);
@@ -154,17 +145,17 @@ public class Driver{
     }
 
     public static void playerTurn(Boolean p1){
-	String player = p1name;
+	String player = "one";
 	String color = p1color;
-	if (!p1) {
-	    player = p2name;
-	    color = p2color;
-	} 
 	boolean check = false;
+	if (!p1){
+	    player="two"; 
+	    color = p2color; 
+	}
 	test.passantRemove(color);
 	System.out.println(test.print(p1));
 	check = test.check(color,p1);
-	System.out.println("It is "+player+"'s turn");
+	System.out.println("It is player "+player+"'s turn");
 	pause(1);
 	if (check){
 	    System.out.println("You are in check!");
@@ -268,7 +259,7 @@ public class Driver{
 		upgrade=sc.nextLine();
 	    }
 	}
-	System.out.println(player+"'s turn is done");
+	System.out.println("Player "+player+"'s turn is done");
 	pause(1);
 	clearConsole();
     }
@@ -288,9 +279,9 @@ public class Driver{
 	System.out.println("Game over!");
 	pause(1);
 	if (p1Victory){
-	    System.out.println("Congratulations "+p1name+"! You are a chess pro!");
+	    System.out.println("Congratulations Player One! You are a chess pro!");
 	}
-	else {System.out.println("Congratulations "+p2name+"! You are a chess pro!");}
+	else {System.out.println("Congratulations Player Two! You are a chess pro!");}
 	pause(3);
 	clearConsole();
     }
