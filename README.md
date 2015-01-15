@@ -33,3 +33,9 @@ A repository for the final project. Our project is chess in the terminal window.
 1/9 - For unknown reasons the capture tracker now works. Now, when the board is printed, captured pieces are displayed to the right.
 
 1/10 - Added a method wich checks if a players pawn has reached the opposite side of the board on his turn. The player is then given the option to promote it. The method was thoroughly tested and has no apparant issues. With the implementation of this method, our  game now has all the features of chess except ascertaining checkmate. However, determining checkmate is outside the scope of this project and requires a much greater investment of time and code. Future work will focus on improving the interface and the visual aspects of the board. 
+
+1/12 - Copied a method from stack overflow to clear the screen. This improves the look of the program and makes it easier to understand.
+
+1/13 - Added player names. This makes it easier to keep track of who's turn it is and makes the game more personal.
+
+1/14 - Finished name implementation and improved victory screen.
