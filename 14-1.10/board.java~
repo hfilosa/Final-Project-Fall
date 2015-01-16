@@ -509,6 +509,42 @@ public class board{
 	}
 	else{return false;}
     } 
+
+    public boolean promotion(boolean p1){
+	int row = 0;
+	if (!p1){
+	    row=7;
+	}
+	for (int col=0;col<8;col++){
+	    if (board[row][col].getname().equals("p")){
+		char c=(char) (col+'a');
+		char r=(char) ((8-row)+'0');
+		System.out.println("Your pawn at "+c+r+" can be promoted!");
+		System.out.println("It may be promoted to a Queen,a Rook, a Knight or a Bishop");
+		System.out.println("Type Q for queen, R for rook, N for knight, or B for bishop");
+		System.out.println("Please enter what you wish to promote this pawn to");
+		return true;
+	    }
+	}
+	return false;
+    }
+    public boolean promote(boolean p1, String upgrade){
+	int row = 0;
+	if (!upgrade.equals("Q") && !upgrade.equals("R") && !upgrade.equals("N") && !upgrade.equals("B")){
+	    System.out.println("Invalid promotion selection");
+	    return false;
+	}
+	if (!p1){
+	    row=7;
+	}
+	for (int col=0;col<8;col++){
+	    if (board[row][col].getname().equals("p")){
+		board[row][col].setname(upgrade);
+		return true;
+	    }
+	}
+	return false;
+    }
 }
 
 

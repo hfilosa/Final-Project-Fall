@@ -355,9 +355,11 @@ public class board{
 		if (!(getPiece(endRow,endCol).equals(" "))){
 		    if (getPiece(endRow,endCol).equals("pas")){
 			if (p1){
+			    p1losses.add(board[endRow+1][endCol]);
 			    board[endRow+1][endCol]=new piece();
 			}
 			if(!p1){
+			    p2losses.add(board[endRow-1][endCol]);
 			    board[endRow-1][endCol]=new piece();
 			}
 		    }

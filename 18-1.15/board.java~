@@ -263,7 +263,6 @@ public class board{
 	    }
 	}
 	if (getPiece(startRow,startCol).equals("N")){
-	    System.out.println("!");
 	    if (!(knightMove(startRow,startCol,endRow,endCol))){
 		System.out.println("That is an illegal move for this knight!");
 		return false;
@@ -447,18 +446,18 @@ public class board{
     
     public boolean shortCastling(String color,boolean p1){
 	boolean legal = false;
-	int row = 0;
+	int row = 7;
 	if (!p1){
-	    row = 7;
+	    row = 0;
 	}
 	if (getPiece(row,4).equals("K") && getPieceColor(row,4).equals(color) && getPiece(row,7).equals("R") && getPieceColor(row,7).equals(color)){
 	    if (!board[row][4].getmoved() && !board[row][7].getmoved()){
 		if (getPiece(row,5).equals(" ") && getPiece(row,6).equals(" ")){
-		    legal = true;
+			legal = true;
 		}
-		else{System.out.println("There are pieces between your king and rook. They cannot castle!");}
+		else {System.out.println("There are pieces between your king and rook. They cannot castle!");}
 	    }
-	    else{System.out.println("Your rook or king has moved and cannot castle");}
+	    else{System.out.println("Your king or rook have moved earlier in the game. They cannot castle!");}
 	}
 	else{System.out.println("Your King or rook isn't even in there original locations! They cannot castle.");}
 	if (legal){
@@ -485,13 +484,16 @@ public class board{
 	}
 	if (getPiece(row,4).equals("K") && getPieceColor(row,4).equals(color) && getPiece(row,0).equals("R") && getPieceColor(row,0).equals(color)){
 	    if (!board[row][4].getmoved() && !board[row][0].getmoved()){
-		if (getPiece(row,5).equals(" ") && getPiece(row,6).equals(" ")){
+		if (getPiece(row,1).equals(" ") && getPiece(row,2).equals(" ") && getPiece(row,3).equals(" ")){
 		    legal = true;
 		}
-		else{System.out.println("There are pieces between your king and rook. They cannot castle!");}
+		else {
+		    System.out.println( "There are pieces between your king and rook. They cannot castle!");
+		}
 	    }
-	    if (board[row][4].getmoved() || board[row][0].getmoved()){
-		System.out.println("Your rook or king has moved and cannot castle");}
+	    else{
+		System.out.println("Your king or rook have moved earlier in the game and cannot castle");
+	    }
 	}
 	else{System.out.println("Your King or rook isn't even in there original locations! They cannot castle.");}
 	if (legal){
@@ -501,11 +503,11 @@ public class board{
 		move(row,2,row,4);
 		move(row,3,row,0);
 		board[row][4].setmoved(false);
-	        board[row][0].setmoved(false);
+		board[row][0].setmoved(false);
 		System.out.println("This move would put you in check!");
 		return false;
 	    }
-	else{return true;}
+	    else{return true;}
 	}
 	else{return false;}
     } 

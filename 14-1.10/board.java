@@ -300,7 +300,7 @@ public class board{
 	    return false;
 	}
 	else {
-	    if (!(endPiece.getname().equals(" "))){// && !(endPiece.getname().equals("pas")));{
+	    if (!(endPiece.getname().equals(" ")) && !(endPiece.getname().equals("pas")));{
 		System.out.println(endPiece.getname());
 		if (p1){
 		    p2losses.add(endPiece);
@@ -404,6 +404,73 @@ public class board{
 	}
 	return true;
     }
+
+    ///////////////-----------------------
+    //    public boolean sweepcheck (int startRow,int startCol
+    public boolean checkmate(int endRow,int endCol){
+	boolean mate=false;
+	String name=getPiece(endRow,endCol);
+	int kRow=0;
+	int kCol=0;
+	if (getPiece(endRow,endCol).equals("K")){
+	    ///// 
+	    return false;
+	}
+	for (int r=0;r<8;r++){
+	    for (int c=0;c<8;c++){
+		if (getPiece(r,c).equals("K")&&!getPieceColor(r,c).equals(getPieceColor(endRow,endCol))){
+			kRow=r;
+			kCol=c;
+		}
+	    }
+	}
+	if (sweepMate(kRow,kCol,endRow,endCol)){
+	    return true;
+	}
+	int x = (endRow-startRow);
+	if (x<0){x=(-1);}
+	else if (x>0){x=1;}
+	int y = (endCol-startCol);
+	if (y<0){y=(-1);}
+	else if (y>0){y=1;}
+	if (!name.equals("N")){
+	    while (kRow!=endRow && kCol!=endCol){
+		kRow+=x;
+		kCol+=y;
+		board[kRow][kCol].setname("m");
+	    }
+	}
+	return mate;
+    }
+   
+    public boolean mSweep(int kRow,int kCol){
+	boolean mate;
+	for (int r=0;r<8;r++){
+	    for (int c=0;c<8;c++){
+		if (!getPiece(r,c).equals(" ")&&!getPiece(r,c).equals("K")){
+		    mate = sweepMate(kRow,kCol,r,c);
+		}
+	    }
+	}
+	//use check for pawn and knight
+    }
+    public boolean sweepMate(int startRow,int startCol,int endRow,int endCol){
+	String name=getPiece(endRow,endCol);
+	if (name.equals("R")){
+	    if (rookMove(endRow,endCol,kRow,kCol)==true){
+		return true;
+	    }
+	} else if (name.equals("B")){
+	    if (bishopMove(endRow,endCol,kRow,kCol)==true){
+		return true;
+	    }
+	} else if (name.equals("Q")){
+	    if (queenMove(endRow,endCol,kRow,kCol)==true){
+		return true;
+	    }
+	}
+	return false;
+    } 
 
     public boolean diagonalMove(int startRow,int startCol,int endRow,int endCol){
 	if (Math.abs(startRow-endRow)==Math.abs(startCol-endCol)){
