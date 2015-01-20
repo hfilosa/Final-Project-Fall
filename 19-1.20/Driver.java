@@ -84,9 +84,9 @@ public class Driver{
 	System.out.println("Coordinates are entered letter first and then number. ex: a2, d6, etc");
 	pause(2);
 	System.out.println("Enter the coordinates of the peice you want to move, then press enter");
-	pause(1);
+	pause(2);
 	System.out.println("The enter the coordinates of where you wish to move the piece");
-	pause(1);
+	pause(2);
 	System.out.println("If a move is illegal it will fail and you will be asked reenter where you wish to move to");
 	pause(2);
 	System.out.println("When entering the coordinates of where to move a piece to, type ! to reselect the piece you want to move");
@@ -154,6 +154,7 @@ public class Driver{
     }
 
     public static void playerTurn(Boolean p1){
+	clearConsole();
 	String player = p1name;
 	String color = p1color;
 	if (!p1) {
@@ -254,8 +255,8 @@ public class Driver{
 		if (move(pmove[0],pmove[1],color,p1)){
 		    done=true;
 		}
-		else {pmove[1]=sc.nextLine();
-		    System.out.println("Enter the coordinates of the piece you wish to move");}	    
+		else {System.out.println("Enter the coordinates of the piece you wish to move");
+		    pmove[1]=sc.nextLine();}	    
 	    }
 	}
 	if (test.promotion(p1)){
@@ -266,7 +267,6 @@ public class Driver{
 	}
 	System.out.println(player+"'s turn is done");
 	pause(1);
-	clearConsole();
     }
    
     public static void main(String[] args){
@@ -281,6 +281,7 @@ public class Driver{
 	     if (won){break;}
 	     playerTurn(false);
 	}
+	clearConsole();
 	System.out.println("Game over!");
 	pause(1);
 	if (p1Victory){

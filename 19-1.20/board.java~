@@ -62,7 +62,7 @@ public class board{
 		if (row==2) {
 		    ans+=boxtop;
 		}
-		if (row==5){
+		if (row==3){
 		    String p2pieces = "         ";
 		    for (piece x: p2losses){
 			p2pieces+=x.toString()+" ";
@@ -72,7 +72,7 @@ public class board{
 		if (row==4) {
 		    ans+=boxtop;
 		}
-		if (row==3){
+		if (row==5){
 		    String p1pieces = "        ";
 		    for (piece x: p1losses){
 			p1pieces+=x.toString()+" ";
@@ -99,7 +99,7 @@ public class board{
         	if (row==2) {
 		    ans+=boxtop;
 		}
-		if (row==3){
+		if (row==5){
 		    String p2pieces = "        ";
 		    for (piece x: p2losses){
 			p2pieces+=x.toString()+" ";
@@ -109,7 +109,7 @@ public class board{
 		if (row==4) {
 		    ans+=boxtop;
 		}
-		if (row==5){
+		if (row==3){
 		    String p1pieces = "        ";
 		    for (piece x: p1losses){
 			p1pieces+=x.toString()+" ";
@@ -300,6 +300,7 @@ public class board{
 	}
 	else {
 	    if (!(endPiece.getname().equals(" ")) && !(endPiece.getname().equals("pas")));{
+		System.out.println(endPiece.getname());
 		if (p1){
 		    p2losses.add(endPiece);
 		}
@@ -395,10 +396,10 @@ public class board{
 	int y = (endCol-startCol);
 	if (y<0){y=(-1);}
 	else if (y>0){y=1;}
-	while (startRow!=(endRow-x) && startCol!=(endCol-y)){
+	while (startRow!=endRow || startCol!=endCol){
 	    startRow+=x;
 	    startCol+=y;
-	    if (!(getPiece(startRow,startCol).equals(" ")) ){
+	    if (!(getPiece(startRow,startCol).equals(" "))){
 	        return false;
 	    }
 	}
