@@ -4,7 +4,7 @@ Ultimate Chess
 
 Henry Filosa & Alice Xue
 
-A repository for the final project. Our project is chess in the terminal window. It can replicate all the features of chess such as castling, pawn promotion, en passants and certifying that moves do not put a player in check. It also has eight different colors to play with.
+A repository for the final project. Our project is chess in the terminal window. It can replicate all the features of chess such as castling, pawn promotion, en passants and certifying that moves do not put a player in check. Due to the complexity of identifying checkmate, we cannot verify if a checkmate is present in the game. Our game also has eight different colors for the users to play with (please note that colors are not available for Windows OS, so the game is not optimal for Windows users). 
 
 12/22 - Started laying the groundwork of the project by creating class files for every type of piece. Our board will be represented by an array of these classes.
 
@@ -26,7 +26,7 @@ A repository for the final project. Our project is chess in the terminal window.
 
 1/6 - En passants are now in the game. When a pawn moves forward 2 spaces on its first move an invisible piece called "pas" is created behind it. The "pas" piece is removed at the start of the players next turn, but while it is there the enemy player may attack the "pas" piece and capture the pawn in front of it. We have also started a system to track pieces that a player has lost.
 
-1/7 - We are wrestling with a bug on the capture tracker. The tracker seems to register moving to an empty space as capturing an enemy piece.
+1/7 - We are wrestling with a bug on the capture tracker. The tracker seems to register moving to an empty space as capturing an enemy piece. 
 
 1/8 - The solution to the capture tracker still eludes us.
 
