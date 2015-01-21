@@ -41,3 +41,5 @@ A repository for the final project. Our project is chess in the terminal window.
 1/14 - Finished name implementation and improved victory screen.
 
 1/15 - Fixed bugs with the castling methods and error messages when entering moves. Pawns captured by en Passant are now added to the loss display.
+
+1/20 - Fixed bugs concerning capturing for rooks, queens, and bishops after we found them testing a game.
