@@ -43,3 +43,8 @@ A repository for the final project. Our project is chess in the terminal window.
 1/15 - Fixed bugs with the castling methods and error messages when entering moves. Pawns captured by en Passant are now added to the loss display.
 
 1/20 - Fixed bugs concerning capturing for rooks, queens, and bishops after we found them testing a game.
+
+1/21 - Fixed the movement of the king and gave it proper error messages.
+
+1/22 - Added a message at the beginning of each turn that states what the other player did on the previous turn.
+
