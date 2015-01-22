@@ -354,11 +354,19 @@ public class board{
 		if (!(getPiece(endRow,endCol).equals(" "))){
 		    if (getPiece(endRow,endCol).equals("pas")){
 			if (p1){
+<<<<<<< HEAD
 			    p1losses.add(board[endRow+1][endCol]);
 			    board[endRow+1][endCol]=new piece();
 			}
 			if(!p1){
 			    p2losses.add(board[endRow-1][endCol]);
+=======
+			    p2losses.add(board[endRow+1][endCol]);
+			    board[endRow+1][endCol]=new piece();
+			}
+			if(!p1){
+			    p1losses.add(board[endRow-1][endCol]);
+>>>>>>> 04b49fbbb07e487f8e3badde35798fe9150e2dd1
 			    board[endRow-1][endCol]=new piece();
 			}
 		    }
@@ -442,7 +450,10 @@ public class board{
 	if (Math.abs(startRow-endRow)<=1 && Math.abs(startCol-endCol)<=1){
 	    return true;
 	}
+<<<<<<< HEAD
 	System.out.println("The King can only move one space at a time!");
+=======
+>>>>>>> 04b49fbbb07e487f8e3badde35798fe9150e2dd1
 	return false;
     }
     
