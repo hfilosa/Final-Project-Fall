@@ -410,6 +410,7 @@ public class board{
 	    if(sweep(startRow,startCol,endRow,endCol)){return true;}
 	    return false;
 	}
+	System.out.println("This piece must move in a diagonal line!");
 	return false;
     }
 
@@ -420,6 +421,7 @@ public class board{
 	    if(sweep(startRow,startCol,endRow,endCol)){return true;}
 		    return false;
 	}
+	System.out.println("This piece must move in a straight line!");
 	return false;
     }
 
