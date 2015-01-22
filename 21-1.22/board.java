@@ -342,7 +342,7 @@ public class board{
 		    }
 		    return true;
 		} 
-		else{System.out.println("Pawns can only move forward two spaces on their first move");}
+		else if (diff==2){System.out.println("Pawns can only move forward two spaces on their first move");}
 	    } else {
 		System.out.println("This pawn is blocked!");
 		return false;
