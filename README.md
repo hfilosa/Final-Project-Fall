@@ -48,3 +48,4 @@ A repository for the final project. Our project is chess in the terminal window.
 
 1/22 - Added a message at the beginning of each turn that states what the other player did on the previous turn.
 
+1/23 - Fixed bug with knight check.
